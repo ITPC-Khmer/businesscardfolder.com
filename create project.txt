@@ -1,0 +1,11 @@
+composer require backpack/generators --dev
+
+composer require laracasts/generators --dev
+
+======================================================
+php artisan make:migration:schema create_tags_table --schema="name:string:unique" --model=0
+php artisan migrate
+php artisan backpack:crud tag #use singular, not plural
+# then manually add this to your routes.php file (under the admin prefix and auth middleware):
+# CRUD::resource('tag', 'TagCrudController');
+
