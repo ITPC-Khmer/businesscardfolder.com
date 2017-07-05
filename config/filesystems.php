@@ -40,6 +40,10 @@ return [
     | Supported Drivers: "local", "ftp", "s3", "rackspace"
     |
     */
+    'uploads' => [
+        'driver' => 'local',
+        'root' => public_path('uploads'),
+    ],
 
     'disks' => [
 

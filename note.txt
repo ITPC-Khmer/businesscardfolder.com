@@ -1,4 +1,9 @@
 php artisan ide-helper:generate
 
 =====================================
+composer create-project --prefer-dist laravel/laravel yourprojectname
+
+php artisan key:generate
+
+composer require backpack/base
 
