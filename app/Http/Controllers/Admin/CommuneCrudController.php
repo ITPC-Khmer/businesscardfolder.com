@@ -29,6 +29,11 @@ class CommuneCrudController extends CrudController
         */
         // ------ CRUD COLUMNS
         $this->crud->addColumn([
+            'name' => 'code',
+            'label' => 'Code',
+        ]);
+
+        $this->crud->addColumn([
             'name' => 'title',
             'label' => 'Commune',
         ]);
@@ -55,6 +60,11 @@ class CommuneCrudController extends CrudController
             'entity' => 'district',
             'attribute' => 'title',
             'model' => "App\Models\District",
+        ]);
+
+        $this->crud->addField([
+            'name' => 'code',
+            'label' => 'Code',
         ]);
 
         $this->crud->addField([

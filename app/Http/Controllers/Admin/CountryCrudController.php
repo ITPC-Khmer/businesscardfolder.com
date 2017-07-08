@@ -33,9 +33,10 @@ class CountryCrudController extends CrudController
             'name' => 'title',
             'label' => 'Country',
         ]);
+
         $this->crud->addColumn([
-            'name' => 'country_code',
-            'label' => 'Country Code',
+            'name' => 'code',
+            'label' => 'Code',
         ]);
         $this->crud->addColumn([
             'name' => 'status',
@@ -49,8 +50,8 @@ class CountryCrudController extends CrudController
         ]);
 
         $this->crud->addField([
-            'name' => 'country_code',
-            'label' => 'Country Code',
+            'name' => 'code',
+            'label' => 'Code',
         ]);
         // ------ CRUD FIELDS
         $this->crud->addField([
