@@ -43,6 +43,18 @@ class ArticleCrudController extends CrudController
             'name' => 'title',
             'label' => 'Title',
         ]);
+
+        $this->crud->addColumn([
+            'name' => 'image',
+            'type' => 'image',
+            'attributes' => [ // Optional (style by default is height: 48px;)
+                'alt' => 'User avatar',
+                'class' => 'img_rounded',
+                'style' => 'width: 50px; height: 50px'
+            ],
+            'link' => True // Optional, this define if the image should have a link to be opened in new tab (default) or not
+        ]);
+
         $this->crud->addColumn([
             'name' => 'featured',
             'label' => 'Featured',
@@ -64,6 +76,7 @@ class ArticleCrudController extends CrudController
             'type' => 'text',
             'placeholder' => 'Your title here',
         ]);
+
         $this->crud->addField([
             'name' => 'slug',
             'label' => 'Slug (URL)',
@@ -98,20 +111,10 @@ class ArticleCrudController extends CrudController
         ]);*/
 
        $this->crud->addField([ // image
+           'default' => asset('no-image.png'),
             'label' => "Profile Image",
             'name' => "image",
-            'type' => 'image',
-            'upload' => true,
-            'crop' => true, // set to true to allow cropping, false to disable
-            'aspect_ratio' => 1, // ommit or set to 0 to allow any aspect ratio
-            // 'prefix' => 'uploads/images/profile_pictures/' // in case you only store the filename in the database, this text will be prepended to the database value
-        ]);
-
-
-       $this->crud->addField([ // image
-            'label' => "Profile Image",
-            'name' => "image",
-            'type' => 'image',
+            'type' => 'image2',
             'upload' => true,
             'crop' => true, // set to true to allow cropping, false to disable
             'aspect_ratio' => 1, // ommit or set to 0 to allow any aspect ratio

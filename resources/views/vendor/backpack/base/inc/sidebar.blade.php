@@ -33,7 +33,7 @@
           <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/page') }}"><i class="fa fa-file-o"></i> <span>Pages</span></a></li>
 
           <li class="treeview">
-            <a href="#"><i class="fa fa-list"></i> <span>Business</span> <i class="fa fa-angle-left pull-right"></i></a>
+            <a href="#"><i class="fa fa-cogs"></i> <span>Business Setting</span> <i class="fa fa-angle-left pull-right"></i></a>
             <ul class="treeview-menu">
               <li><a href="{{ url(config('backpack.base.route_prefix').'/business_intermediary') }}"><i class="fa fa-file-o"></i> <span>Intermediary</span></a></li>
               <li><a href="{{ url(config('backpack.base.route_prefix').'/business_function') }}"><i class="fa fa-file-o"></i> <span>Function</span></a></li>
@@ -43,16 +43,17 @@
           </li>
 
           <li class="treeview">
-            <a href="#"><i class="fa fa-list"></i> <span>Contact</span> <i class="fa fa-angle-left pull-right"></i></a>
+            <a href="#"><i class="fa fa-cogs"></i> <span>Contact Setting</span> <i class="fa fa-angle-left pull-right"></i></a>
             <ul class="treeview-menu">
               <li><a href="{{ url(config('backpack.base.route_prefix').'/mobile') }}"><i class="fa fa-file-o"></i> <span>Mobile</span></a></li>
               <li><a href="{{ url(config('backpack.base.route_prefix').'/telephone') }}"><i class="fa fa-file-o"></i> <span>Telephone</span></a></li>
               <li><a href="{{ url(config('backpack.base.route_prefix').'/social_media') }}"><i class="fa fa-file-o"></i> <span>Social Media</span></a></li>
+              <li><a href="{{ url(config('backpack.base.route_prefix').'/mobile_network') }}"><i class="fa fa-file-o"></i> <span>Mobile Network</span></a></li>
             </ul>
           </li>
 
           <li class="treeview">
-            <a href="#"><i class="fa fa-list"></i> <span>Location</span> <i class="fa fa-angle-left pull-right"></i></a>
+            <a href="#"><i class="fa fa-cogs"></i> <span>Location Setting</span> <i class="fa fa-angle-left pull-right"></i></a>
             <ul class="treeview-menu">
               <li><a href="{{ url(config('backpack.base.route_prefix').'/village') }}"><i class="fa fa-file-o"></i> <span>Village</span></a></li>
               <li><a href="{{ url(config('backpack.base.route_prefix').'/commune') }}"><i class="fa fa-file-o"></i> <span>Commune</span></a></li>

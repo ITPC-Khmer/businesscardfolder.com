@@ -16,6 +16,7 @@ class CreateVillagesTable extends Migration
         Schema::create('villages', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('commune_id')->index()->nullable();
+            $table->string('code')->index()->nullable();
             $table->string('title')->index()->nullable();
             $table->enum('status', ['ACTIVE', 'INACTIVE'])->default('ACTIVE');
             $table->timestamps();

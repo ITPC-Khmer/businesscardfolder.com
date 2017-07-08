@@ -30,6 +30,11 @@ class ProvinceCrudController extends CrudController
 
         // ------ CRUD COLUMNS
         $this->crud->addColumn([
+            'name' => 'code',
+            'label' => 'Code',
+        ]);
+        // ------ CRUD COLUMNS
+        $this->crud->addColumn([
             'name' => 'title',
             'label' => 'Province',
         ]);
@@ -56,6 +61,11 @@ class ProvinceCrudController extends CrudController
             'entity' => 'country',
             'attribute' => 'title',
             'model' => "App\Models\Country",
+        ]);
+
+        $this->crud->addField([
+            'name' => 'code',
+            'label' => 'Code',
         ]);
 
         $this->crud->addField([

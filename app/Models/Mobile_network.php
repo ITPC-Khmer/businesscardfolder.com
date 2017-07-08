@@ -7,7 +7,7 @@ use Backpack\CRUD\CrudTrait;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 
-class Social_media extends Model
+class Mobile_network extends Model
 {
     use CrudTrait;
 
@@ -17,14 +17,13 @@ class Social_media extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'social_media';
+    protected $table = 'mobile_networks';
     protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
     protected $fillable = ['title', 'company_name','logo','website','prefix_account','description','status'];
     // protected $hidden = [];
     // protected $dates = [];
-
 
     public function setLogoAttribute($value)
     {

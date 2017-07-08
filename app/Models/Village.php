@@ -19,7 +19,7 @@ class Village extends Model
     protected $primaryKey = 'id';
     public $timestamps = true;
     // protected $guarded = ['id'];
-    protected $fillable = ['commune_id','title','status'];
+    protected $fillable = ['commune_id','code','title','status'];
     // protected $hidden = [];
     // protected $dates = [];
 

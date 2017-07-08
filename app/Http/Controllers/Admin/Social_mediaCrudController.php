@@ -68,9 +68,10 @@ class Social_mediaCrudController extends CrudController
         ]);
 
         $this->crud->addField([ // image
+            'default' => asset('no-image.png'),
             'label' => "Logo",
             'name' => "logo",
-            'type' => 'image',
+            'type' => 'image2',
             'upload' => true,
             'crop' => true, // set to true to allow cropping, false to disable
             'aspect_ratio' => 1, // ommit or set to 0 to allow any aspect ratio

@@ -16,6 +16,7 @@ class CreateCommunesTable extends Migration
         Schema::create('communes', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('district_id')->index()->nullable();
+            $table->string('code')->index()->nullable();
             $table->string('title')->index()->nullable();
             $table->enum('status', ['ACTIVE', 'INACTIVE'])->default('ACTIVE');
             $table->timestamps();

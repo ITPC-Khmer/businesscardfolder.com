@@ -39,4 +39,6 @@ Route::group([
     CRUD::resource('mobile', 'MobileCrudController');
     CRUD::resource('telephone', 'TelephoneCrudController');
     CRUD::resource('social_media', 'Social_mediaCrudController');
+    CRUD::resource('mobile_network', 'Mobile_networkCrudController');
+
 });

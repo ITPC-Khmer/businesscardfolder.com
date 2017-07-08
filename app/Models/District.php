@@ -19,7 +19,7 @@ class District extends Model
     protected $primaryKey = 'id';
     public $timestamps = true;
     // protected $guarded = ['id'];
-    protected $fillable = ['province_id','title','status'];
+    protected $fillable = ['province_id','code','title','status'];
     // protected $hidden = [];
     // protected $dates = [];
 

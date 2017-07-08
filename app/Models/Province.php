@@ -19,7 +19,7 @@ class Province extends Model
     protected $primaryKey = 'id';
     public $timestamps = true;
     // protected $guarded = ['id'];
-    protected $fillable = ['country_id','title','status'];
+    protected $fillable = ['country_id','code','title','status'];
     // protected $hidden = [];
     // protected $dates = [];
 

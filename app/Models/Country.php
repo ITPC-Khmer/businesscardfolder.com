@@ -19,7 +19,7 @@ class Country extends Model
     protected $primaryKey = 'id';
     public $timestamps = true;
     // protected $guarded = ['id'];
-    protected $fillable = ['title','country_code','status'];
+    protected $fillable = ['title','code','status'];
     // protected $hidden = [];
     // protected $dates = [];
 

@@ -19,7 +19,7 @@ class Commune extends Model
     protected $primaryKey = 'id';
     public $timestamps = true;
     // protected $guarded = ['id'];
-    protected $fillable = ['district_id','title','status'];
+    protected $fillable = ['district_id','code','title','status'];
     // protected $hidden = [];
     // protected $dates = [];
 
