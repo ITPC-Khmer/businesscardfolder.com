@@ -25,7 +25,7 @@ class Business_intermediaryRequest extends \Backpack\CRUD\app\Http\Requests\Crud
     public function rules()
     {
         return [
-            // 'name' => 'required|min:5|max:255'
+            'title' => 'required|min:2|max:191'
         ];
     }
 

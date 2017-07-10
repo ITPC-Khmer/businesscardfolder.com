@@ -14,6 +14,11 @@ class User extends Authenticatable
     {
         $this->notify(new ResetPasswordNotification($token));
     }
+
+    public function getId()
+    {
+        return $this->id;
+    }
     /**
      * The attributes that are mass assignable.
      *

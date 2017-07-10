@@ -1,5 +1,7 @@
 php artisan ide-helper:generate
 
+
+
 =====================================
 composer create-project --prefer-dist laravel/laravel yourprojectname
 
@@ -7,3 +9,37 @@ php artisan key:generate
 
 composer require backpack/base
 
+=======================================
+For Laravel 5 installation edit your project's composer.json file to require orangehill/iseed.
+
+"require": {
+	"orangehill/iseed": "dev-master"
+}
+
+Orangehill\Iseed\IseedServiceProvider::class
+
+Examples:
+
+php artisan iseed my_table
+php artisan iseed my_table,another_table
+force
+
+Optional parameter which is used to automatically overwrite any existing seeds for desired tables
+
+Example: The following command will overwrite UsersTableSeeder.php if it already exists in laravel's seeds directory.
+
+php artisan iseed users --force
+dumpauto
+
+Optional boolean parameter that controls the execution of composer dump-autoload command. Defaults to true.
+
+Example that will stop composer dump-autoload from execution:
+
+php artisan iseed users --dumpauto=false
+clean
+
+Optional parameter which will clean app/database/seeds/DatabaseSeeder.php before creating new seed class.
+
+Example:
+
+php artisan iseed users --clean

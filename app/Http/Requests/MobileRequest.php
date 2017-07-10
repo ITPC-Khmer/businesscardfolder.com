@@ -25,7 +25,8 @@ class MobileRequest extends \Backpack\CRUD\app\Http\Requests\CrudRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:5|max:255'
+            'company_name' => 'required|min:2|max:191',
+            'country_id' => 'required|min:1',
         ];
     }
 

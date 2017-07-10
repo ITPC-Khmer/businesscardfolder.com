@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class ProvinceRequest extends \Backpack\CRUD\app\Http\Requests\CrudRequest
+class MemberRequest extends \Backpack\CRUD\app\Http\Requests\CrudRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,23 @@ class ProvinceRequest extends \Backpack\CRUD\app\Http\Requests\CrudRequest
      */
     public function rules()
     {
-        return [
-            'title' => 'required|min:2|max:191',
-            'country_id' => 'required|min:1',
-        ];
+
+        $rule = ['name' => 'required|max:191'];
+
+        if ($this->id > 0) {
+            $rule['email'] = 'required|email|unique:members,email,' . $this->id . '|max:191';
+
+            if ($this->password != '') {
+                $rule['password'] = 'required|min:6|confirmed';
+            }
+
+        } else {
+            $rule['email'] = 'required|email|unique:members,email|max:191';
+            $rule['password'] = 'required|min:6|confirmed';
+        }
+
+        return $rule;
+
     }
 
     /**

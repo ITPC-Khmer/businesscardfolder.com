@@ -25,7 +25,8 @@ class Business_typeRequest extends \Backpack\CRUD\app\Http\Requests\CrudRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:5|max:255'
+            'title' => 'required|min:2|max:191',
+            'business_category_id' => 'required|min:1'
         ];
     }
 

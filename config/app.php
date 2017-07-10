@@ -186,6 +186,8 @@ return [
         Backpack\Settings\SettingsServiceProvider::class,
         Cviebrock\EloquentSluggable\ServiceProvider::class,
         Backpack\PageManager\PageManagerServiceProvider::class,
+        Orangehill\Iseed\IseedServiceProvider::class,
+        App\Providers\HelperServiceProvider::class,
 
     ],
 
