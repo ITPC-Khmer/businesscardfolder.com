@@ -10,6 +10,16 @@ use Intervention\Image\Facades\Image;
 
 class GH extends Model
 {
+    public static function getImage($img)
+    {
+        if(File::exists($img))
+        {
+            return asset($img);
+        }else{
+            return asset('no-image.png');
+        }
+    }
+
     public static function getRoleArray()
     {
         return [

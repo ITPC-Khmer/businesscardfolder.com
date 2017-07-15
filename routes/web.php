@@ -19,6 +19,14 @@ Route::group(['prefix' => 'bcf',
         return redirect('admin/member');
     });
 
+    //======================================================
+    //======================================================
+    Route::get('/{code}/head-office-business-card','CompanyController@headOfficeBusinessCard');
+    Route::post('/{code}/head-office-business-card','CompanyController@headOfficeBusinessCardSave');
+
+    //======================================================
+    //======================================================
+
     Route::get('/{code}', function ($code,Request $request) {
         $member_id = getMemberID() > 0?getMemberID() : code_number_to_id($code);
         if($member_id >0) {
@@ -37,6 +45,8 @@ Route::group(['prefix' => 'bcf',
     Route::get('/{code}/business-card', function ($code) {
         return view('member.business-card',['code'=>$code,'id'=>code_number_to_id($code)]);
     });
+
+    Route::get('{code}/business-card-save','CompanyController@headOfficeBusinessCardSave');
 
 });
 
@@ -67,10 +77,26 @@ Route::group([
     CRUD::resource('mobile_network', 'Mobile_networkCrudController');
     CRUD::resource('email_company', 'Email_companyCrudController');
 
-
     CRUD::resource('department', 'DepartmentCrudController');
     CRUD::resource('position', 'PositionCrudController');
 
     CRUD::resource('member', 'MemberCrudController');
+
+    CRUD::resource('itembrand', 'ItemBrandCrudController');
+
+    //===================================================
+    //===================================================
+    //CRUD::resource('user', 'UserCrudController');
+
+    // !!! DIFFERENT ADMIN PANEL FOR USER POSTS
+    Route::group(['prefix' => 'user/{user_id}'], function()
+    {
+        CRUD::resource('post', 'UserPostCrudController');
+    });
+
+    //===================================================
+    //===================================================
+
+
 
 });

@@ -1,5 +1,8 @@
 <?php
-
+function getImageUrl($img)
+{
+    return \App\Helpers\GH::getImage($img);
+}
 
 function create_code_number($n) {
     $numbers_only = preg_replace("/[^\d]/", "", $n);

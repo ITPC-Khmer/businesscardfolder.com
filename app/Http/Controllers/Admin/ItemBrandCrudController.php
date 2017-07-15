@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Admin;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
-use App\Http\Requests\MobileRequest as StoreRequest;
-use App\Http\Requests\MobileRequest as UpdateRequest;
+use App\Http\Requests\ItemBrandRequest as StoreRequest;
+use App\Http\Requests\ItemBrandRequest as UpdateRequest;
 
-class MobileCrudController extends CrudController
+class ItemBrandCrudController extends CrudController
 {
     public function setup()
     {
@@ -18,9 +18,9 @@ class MobileCrudController extends CrudController
         | BASIC CRUD INFORMATION
         |--------------------------------------------------------------------------
         */
-        $this->crud->setModel('App\Models\Mobile');
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/mobile');
-        $this->crud->setEntityNameStrings('Mobile', 'Mobiles');
+        $this->crud->setModel('App\Models\ItemBrand');
+        $this->crud->setRoute(config('backpack.base.route_prefix') . '/itembrand');
+        $this->crud->setEntityNameStrings('Item Brand', 'Item Brands');
 
         /*
         |--------------------------------------------------------------------------
@@ -30,17 +30,8 @@ class MobileCrudController extends CrudController
 
         // ------ CRUD COLUMNS
         $this->crud->addColumn([
-            'label' => 'Country',
-            'type' => 'select',
-            'name' => 'country_id',
-            'entity' => 'country',
-            'attribute' => 'title',
-            'model' => "App\Models\Country",
-        ]);
-
-        $this->crud->addColumn([
-            'name' => 'company_name',
-            'label' => 'Company Name',
+            'name' => 'name',
+            'label' => 'Name',
         ]);
 
         $this->crud->addColumn([
@@ -55,33 +46,15 @@ class MobileCrudController extends CrudController
         ]);
 
         $this->crud->addColumn([
-            'name' => 'website',
-            'label' => 'Website',
-        ]);
-
-        $this->crud->addColumn([
-            'name' => 'prefix_number',
-            'label' => 'Prefix Number',
-        ]);
-
-        $this->crud->addColumn([
             'name' => 'status',
             'label' => 'Status',
         ]);
 
         // ------ CRUD FIELDS
-        $this->crud->addField([    // SELECT
-            'label' => 'Country',
-            'type' => 'select2',
-            'name' => 'country_id',
-            'entity' => 'country',
-            'attribute' => 'title',
-            'model' => "App\Models\Country",
-        ]);
 
         $this->crud->addField([
-            'name' => 'company_name',
-            'label' => 'Company Name',
+            'name' => 'name',
+            'label' => 'Name',
         ]);
 
         $this->crud->addField([ // image
@@ -95,22 +68,7 @@ class MobileCrudController extends CrudController
             // 'prefix' => 'uploads/images/profile_pictures/' // in case you only store the filename in the database, this text will be prepended to the database value
         ]);
 
-        $this->crud->addField([
-            'name' => 'website',
-            'label' => 'Website',
-        ]);
-
-        $this->crud->addField([
-            'name' => 'prefix_number',
-            'label' => 'Prefix Number',
-        ]);
-
-        $this->crud->addField([
-            'name' => 'description',
-            'label' => 'Description',
-        ]);
-
-        // ------ CRUD FIELDS
+               // ------ CRUD FIELDS
         $this->crud->addField([
             'name' => 'status',
             'label' => 'Status',
@@ -118,6 +76,7 @@ class MobileCrudController extends CrudController
         ]);
 
         $this->crud->enableAjaxTable();
+
     }
 
     public function store(StoreRequest $request)
@@ -137,5 +96,4 @@ class MobileCrudController extends CrudController
         // use $this->data['entry'] or $this->crud->entry
         return $redirect_location;
     }
-
 }

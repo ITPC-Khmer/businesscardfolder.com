@@ -3,12 +3,11 @@
 @section('header')
     <section class="content-header">
         <h1>
-            {{ trans('backpack::base.dashboard') }}
+            User Account
             {{--<small>{{ trans('backpack::base.first_page_you_see') }}</small>--}}
         </h1>
         <ol class="breadcrumb">
-            <li><a href="{{ url("bcf/") }}">Business Card folder</a></li>
-            <li class="active">{{ trans('backpack::base.dashboard') }}</li>
+            <li><a href="">User Account</a></li>
         </ol>
     </section>
 @endsection
@@ -57,7 +56,7 @@
                         <tr>
                             <td  style="width: 200px">Photo</td>
                             <td>
-                                <img src="{{ asset($row->photo) }}" height="100">
+                                <img src="{{ getImageUrl($row->photo) }}" height="100">
                             </td>
                             <td  style="width: 40px"><a href="{{ url("admin/member/{$row->id}/edit") }}" class="btn btn-xs btn-default"><i class="fa fa-edit"></i> Edit</a></td>
                         </tr>

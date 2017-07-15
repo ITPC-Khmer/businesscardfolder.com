@@ -2,17 +2,11 @@
 
 use Illuminate\Http\Request;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/bcf-category', 'Api\CompanyApiController@getCategoryAjax');
+Route::get('/bcf-category-type', 'Api\CompanyApiController@getCategoryTypeAjax');
+Route::get('/bcf-function', 'Api\CompanyApiController@getFunctionAjax');
+Route::get('/bcf-intermediary', 'Api\CompanyApiController@getIntermediaryAjax');

@@ -26,7 +26,7 @@ class Article extends Model
     protected $primaryKey = 'id';
     public $timestamps = true;
     // protected $guarded = ['id'];
-    protected $fillable = ['slug', 'title', 'content', 'image', 'status', 'category_id', 'featured', 'date'];
+    protected $fillable = ['user_id','slug', 'title', 'content', 'image', 'status', 'category_id', 'featured', 'date'];
     // protected $hidden = [];
     // protected $dates = [];
     protected $casts = [
@@ -97,6 +97,14 @@ class Article extends Model
         }
 
         return $this->title;
+    }
+
+    public function setUserIdAttribute($value)
+    {
+        // get the user_id parameter
+        $user_id = \Route::current()->parameter('user_id');
+        //dd($user_id);
+        if($user_id != null) $this->attributes['user_id'] = $user_id;
     }
 
     public function setImageAttribute($value)
