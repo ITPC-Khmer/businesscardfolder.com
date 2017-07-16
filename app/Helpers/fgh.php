@@ -1,4 +1,10 @@
 <?php
+
+function getRND()
+{
+    return rand(1, 100) . time() .  rand(1, 100);
+}
+
 function getImageUrl($img)
 {
     return \App\Helpers\GH::getImage($img);

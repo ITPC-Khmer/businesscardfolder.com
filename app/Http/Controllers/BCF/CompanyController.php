@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BCF;
 
+use App\Models\BCF\Company;
 use App\Models\Member;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -18,7 +19,8 @@ class CompanyController extends Controller
                 if(getUserID()>0) {
                     $request->session()->put('admin_member_id', $m->id);
                 }
-                return view('member.head-office-business-card', ['code' => $code, 'member_id' => $member_id,'row'=>$m]);
+                $row = Company::where('member_id',$m->id)->first();
+                return view('member.head-office-business-card', ['code' => $code, 'member_id' => $member_id,'row'=>$row]);
             }
         }
         return '';
@@ -26,7 +28,11 @@ class CompanyController extends Controller
 
     function headOfficeBusinessCardSave(Request $request)
     {
-        dd($request);
+        $m = Company::saveData($request);
+        if($m != null)
+        {
+            return redirect()->back();
+        }
     }
 
 
