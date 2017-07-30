@@ -28,7 +28,7 @@ class CompanyController extends Controller
 
     function headOfficeBusinessDocumentUploadSave(Request $request)
     {
-        $m = Company::saveData($request);
+        $m = Company::headOfficeBusinessDocumentUploadSave($request);
         if($m != null)
         {
             return redirect()->back();
@@ -53,7 +53,7 @@ class CompanyController extends Controller
 
     function headOfficeBusinessCardSave(Request $request)
     {
-        $m = Company::saveData($request);
+        $m = Company::headOfficeBusinessCardSave($request);
         if($m != null)
         {
             return redirect()->back();

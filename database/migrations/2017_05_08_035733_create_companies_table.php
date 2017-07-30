@@ -78,7 +78,15 @@ class CreateCompaniesTable extends Migration
             $table->text('mobile_network')->nullable();// json
 
             // image
-            $table->text('image')->nullable();// json
+            $table->string('logo_vertical')->nullable();
+            $table->string('logo_horizontal')->nullable();
+            $table->string('company_view')->nullable();
+            $table->string('landmark')->nullable();
+            $table->string('patent')->nullable();
+            $table->string('vatin')->nullable();
+            $table->string('working_room')->nullable();
+            $table->string('meeting_room')->nullable();
+            // end image
 
             $table->text('working_hours')->nullable();// json
 
