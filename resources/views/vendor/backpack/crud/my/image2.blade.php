@@ -5,7 +5,6 @@ $f_id = isset($field['name'])? str_replace(']','',str_replace('[','',$field['nam
 <div class="form-group col-md-12 image" data-preview="#{{ $f_id.$r_id }}" data-aspectRatio="{{ isset($field['aspect_ratio']) ? $field['aspect_ratio'] : 0 }}" data-crop="{{ isset($field['crop']) ? $field['crop'] : false }}" @include('crud::inc.field_wrapper_attributes')>
     <div>
         <label>{!! $field['label'] !!}</label>
-        @include('crud::inc.field_translatable_icon')
     </div>
     <!-- Wrap the image or canvas element with a block element (container) -->
     <div class="row">
@@ -47,7 +46,8 @@ $f_id = isset($field['name'])? str_replace(']','',str_replace('[','',$field['nam
 {{-- ########################################## --}}
 {{-- Extra CSS and JS for this particular field --}}
 {{-- If a field type is shown multiple times on a form, the CSS and JS will only be loaded once --}}
-@if ($crud->checkIfFieldIsFirstOfItsType($field, $fields))
+
+@if ($field['is_first'] - 0 == 1)
 
     {{-- FIELD CSS - will be loaded in the after_styles section --}}
     @push('crud_fields_styles')

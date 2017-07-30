@@ -24,6 +24,9 @@ Route::group(['prefix' => 'bcf',
     Route::get('/{code}/head-office-business-card','CompanyController@headOfficeBusinessCard');
     Route::post('/{code}/head-office-business-card','CompanyController@headOfficeBusinessCardSave');
 
+    Route::get('/{code}/head-office-business-document-upload','CompanyController@headOfficeBusinessDocumentUpload');
+    Route::post('/{code}/head-office-business-document-upload','CompanyController@headOfficeBusinessDocumentUploadSave');
+
     //======================================================
     //======================================================
 

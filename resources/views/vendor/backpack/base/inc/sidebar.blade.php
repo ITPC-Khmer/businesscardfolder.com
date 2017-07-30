@@ -134,7 +134,7 @@
         <li><a href="{{ url('/bcf/'.create_code_number(getMember2ID())) }}"><i class="fa fa-dashboard"></i> <span>User Account</span></a></li>
 
         <li><a href="{{ url('/bcf/'.create_code_number(getMember2ID()).'/head-office-business-card') }}"><i class="fa fa-file-o"></i> <span>Head Office Business Card</span></a></li>
-        <li><a href="{{ url('/') }}"><i class="fa fa-file-o"></i> <span>Official Document Upload</span></a></li>
+        <li><a href="{{ url('/bcf/'.create_code_number(getMember2ID()).'/head-office-business-document-upload') }}"><i class="fa fa-file-o"></i> <span>Official Document Upload</span></a></li>
         <li><a href="{{ url('/') }}"><i class="fa fa-file-o"></i> <span>Departmental Name Card</span></a></li>
         <li><a href="{{ url('/') }}"><i class="fa fa-file-o"></i> <span>Departmental Name Card View</span></a></li>
 
