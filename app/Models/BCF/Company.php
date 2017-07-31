@@ -57,6 +57,21 @@ class Company extends Model
         $m->business_function_id = json_encode($business_function_id) ;
         $m->business_intermediary_id = json_encode($business_intermediary_id) ;
 
+        $m->country_id = $request->country_id;
+        $m->province_id = $request->province_id;
+        $m->district_id = $request->district_id;
+        $m->commune_id = $request->commune_id;
+        $m->address = $request->address;
+
+        $m->email = $request->email;
+        $m->fax = $request->fax;
+        $m->website = $request->website;
+
+        $m->mobile_number = json_encode($request->mobile_number);
+        $m->telephone_number = json_encode($request->telephone_number);
+        $m->social_media = json_encode($request->social_media);
+        $m->mobile_network = json_encode($request->mobile_network);
+
 
         return $m->save() ? $m : null;
 

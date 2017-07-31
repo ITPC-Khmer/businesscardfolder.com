@@ -6,6 +6,10 @@ use App\Models\Business_category;
 use App\Models\Business_function;
 use App\Models\Business_intermediary;
 use App\Models\Business_type;
+use App\Models\Commune;
+use App\Models\Country;
+use App\Models\District;
+use App\Models\Province;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -27,6 +31,62 @@ class CompanyApiController extends Controller
 
         return $results;
     }
+
+    function getAddressAjax(Request $request)
+    {
+        $search_term = $request->input('q');
+        $page = $request->input('page');
+        $ref = $request->input('ref');
+        $select_type = $request->input('select_type');
+
+        $results = [];
+
+        if($select_type == 'country'){
+            if ($search_term)
+            {
+                $results = Country::where('title', 'LIKE', '%'.$search_term.'%')->paginate(50);
+            }
+            else
+            {
+                $results = Country::paginate(50);
+            }
+
+        }
+        elseif($select_type == 'province'){
+            if ($search_term)
+            {
+                $results = Province::where('title', 'LIKE', '%'.$search_term.'%')->where('country_id',$ref)->paginate(10);
+            }
+            else
+            {
+                $results = Province::where('country_id',$ref)->paginate(10);
+            }
+        }
+        elseif($select_type == 'district'){
+            if ($search_term)
+            {
+                $results = District::where('title', 'LIKE', '%'.$search_term.'%')->where('province_id',$ref)->paginate(10);
+            }
+            else
+            {
+                $results = District::where('province_id',$ref)->paginate(10);
+            }
+        }
+        elseif($select_type == 'commune'){
+            if ($search_term)
+            {
+                $results = Commune::where('title', 'LIKE', '%'.$search_term.'%')->where('district_id',$ref)->paginate(10);
+            }
+            else
+            {
+                $results = Commune::where('district_id',$ref)->paginate(10);
+            }
+        }
+
+        return $results;
+    }
+
+
 
     function getFunctionAjax(Request $request)
     {

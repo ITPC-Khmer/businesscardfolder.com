@@ -10,3 +10,6 @@ Route::get('/bcf-category', 'Api\CompanyApiController@getCategoryAjax');
 Route::get('/bcf-category-type', 'Api\CompanyApiController@getCategoryTypeAjax');
 Route::get('/bcf-function', 'Api\CompanyApiController@getFunctionAjax');
 Route::get('/bcf-intermediary', 'Api\CompanyApiController@getIntermediaryAjax');
+
+
+Route::get('/bcf-get-address', 'Api\CompanyApiController@getAddressAjax');

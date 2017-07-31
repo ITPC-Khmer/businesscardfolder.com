@@ -2,6 +2,20 @@
 $id = isset($row->id)?$row->id:0;
 $official_name = isset($row->official_name)?$row->official_name:'';
 $business_type_json = isset($row->business_type_json)?json_decode($row->business_type_json):[];
+
+$country_id = isset($row->country_id)?$row->country_id:'';
+$province_id = isset($row->province_id)?$row->province_id:'';
+$district_id = isset($row->district_id)?$row->district_id:'';
+$commune_id = isset($row->district_id)?$row->commune_id:'';
+$address = isset($row->address)?$row->address:'';
+
+
+
+$mobile_number = isset($row->mobile_number)?json_decode($row->mobile_number,true):[];
+$telephone_number = isset($row->telephone_number)?json_decode($row->telephone_number,true):[];
+$social_media = isset($row->social_media)?json_decode($row->social_media,true):[];
+$mobile_network = isset($row->mobile_network)?json_decode($row->mobile_network,true):[];
+
 ?>
 @extends('backpack::layout')
 
@@ -150,6 +164,232 @@ $business_type_json = isset($row->business_type_json)?json_decode($row->business
                                     </tbody>
                                 @endforeach
                             @endif
+
+                            <tr><td colspan="3">BUSINESS ADDRESS</td></tr>
+
+                            <tr style="border: 1px solid #0000cc;">
+                                <td colspan="3" style="border: 1px solid #0081ff;marregiongin-top: 5px; ">
+                                    <table class="table" style="width: 100%;margin-top: 5px; ">
+
+                                        <tr>
+                                            <td style="width: 200px;">Country <span style="color: red;">*</span></td>
+                                            <td colspan="2">
+                                                @php
+                                                    $country = \App\Models\Country::find($country_id);
+                                                @endphp
+                                                <select name="country_id"
+                                                        data-multiple="0" data-url="{{ url('api/bcf-get-address') }}"
+                                                        class="form-control select2_ajax_multiple country"
+                                                        data-placeholder="Country"
+                                                        style="width: 100%" required>
+                                                    @if($country != null)
+                                                    <option value="{{ $country->id }}">{{ $country->title }}</option>
+                                                    @endif
+                                                </select>
+                                            </td>
+                                        </tr>
+{{--
+
+                                        <tr>
+                                            <td style="width: 200px;">Region <span style="color: red;">*</span></td>
+                                            <td colspan="2">
+                                                <select name="region"
+                                                        data-multiple="0" data-url="{{ url('api/bcf-get-address') }}"
+                                                        class="form-control select2_ajax_multiple region"
+                                                        data-placeholder="Region"
+                                                        style="width: 100%">
+
+                                                    <option value=""></option>
+                                                </select>
+                                            </td>
+                                        </tr>
+--}}
+
+                                        <tr>
+                                            <td style="width: 200px;">Province <span style="color: red;">*</span></td>
+                                            <td colspan="2">
+                                                @php
+                                                    $province = \App\Models\Province::where('country_id',$country_id)->where('id',$province_id)->first();
+                                                @endphp
+                                                <select name="province_id"
+                                                        data-multiple="0" data-url="{{ url('api/bcf-get-address') }}"
+                                                        class="form-control select2_ajax_multiple province"
+                                                        data-placeholder="Province"
+                                                        style="width: 100%" required>
+
+                                                    @if($province != null)
+                                                        <option value="{{ $province->id }}">{{ $province->title }}</option>
+                                                    @endif
+                                                </select>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="width: 200px;">District <span style="color: red;">*</span></td>
+                                            <td colspan="2">
+                                                @php
+                                                    $district = \App\Models\District::where('province_id',$province_id)->where('id',$district_id)->first();
+                                                @endphp
+                                                <select name="district_id"
+                                                        data-multiple="0" data-url="{{ url('api/bcf-get-address') }}"
+                                                        class="form-control select2_ajax_multiple district"
+                                                        data-placeholder="District"
+                                                        style="width: 100%" required>
+                                                    @if($district != null)
+                                                        <option value="{{ $district->id }}">{{ $district->title }}</option>
+                                                    @endif
+
+                                                </select>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="width: 200px;">Commune <span style="color: red;">*</span></td>
+                                            <td colspan="2">
+                                                @php
+                                                    $commune = \App\Models\Commune::where('district_id',$district_id)->where('id',$commune_id)->first();
+                                                @endphp
+                                                <select name="commune_id"
+                                                        data-multiple="0" data-url="{{ url('api/bcf-get-address') }}"
+                                                        class="form-control select2_ajax_multiple commune"
+                                                        data-placeholder="Commune"
+                                                        style="width: 100%" required>
+                                                    @if($commune != null)
+                                                        <option value="{{ $commune->id }}">{{ $commune->title }}</option>
+                                                    @endif
+
+                                                </select>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="width: 200px;">Business Address <span style="color: red;">*</span></td>
+                                            <td colspan="2">
+                                                <textarea name="address"  class="form-control address" required>{{ $address }}</textarea>
+                                            </td>
+                                        </tr>
+
+
+                                    </table>
+
+                                </td>
+
+                            </tr>
+
+
+                            <tr><td colspan="3">MOBILE PHONE CONTACT</td></tr>
+
+                            <tr style="border: 1px solid #0000cc;">
+                                <td colspan="3" style="border: 1px solid #0081ff;marregiongin-top: 5px; ">
+                                    <table class="table" style="width: 100%;margin-top: 5px; ">
+                                        @php
+                                             $mobile = \App\Models\Mobile::all();
+                                        @endphp
+
+                                        @if(count($mobile)>0)
+                                            @foreach($mobile as $row)
+                                                <tr>
+                                                    <td style="width: 200px;">{{ $row->company_name }}</td>
+                                                    <td colspan="2">
+                                                        <input type="hidden" name="mobile_number[{{ $row->id }}][id]" value="{{ $row->id }}">
+                                                        <input type="hidden" name="mobile_number[{{ $row->id }}][key]" value="{{ $row->company_name }}">
+                                                        <input class="form-control" type="text" name="mobile_number[{{ $row->id }}][value]" value="{{ isset($mobile_number[$row->id]['value'])?$mobile_number[$row->id]['value']:'' }}">
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
+                                    </table>
+                                </td>
+                            </tr>
+
+                            <tr><td colspan="3">TELEPHONE CONTACT</td></tr>
+
+                            <tr style="border: 1px solid #0000cc;">
+                                <td colspan="3" style="border: 1px solid #0081ff;marregiongin-top: 5px; ">
+                                    <table class="table" style="width: 100%;margin-top: 5px; ">
+                                        <tr>
+                                            <td style="width: 200px;">Country <span style="color: red;">*</span></td>
+                                            <td colspan="2"></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr><td colspan="3">FAX CONTACT</td></tr>
+
+                            <tr style="border: 1px solid #0000cc;">
+                                <td colspan="3" style="border: 1px solid #0081ff;marregiongin-top: 5px; ">
+                                    <table class="table" style="width: 100%;margin-top: 5px; ">
+                                        <tr>
+                                            <td style="width: 200px;">Country <span style="color: red;">*</span></td>
+                                            <td colspan="2"></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr><td colspan="3">E-MAIL CONTACT</td></tr>
+
+                            <tr style="border: 1px solid #0000cc;">
+                                <td colspan="3" style="border: 1px solid #0081ff;marregiongin-top: 5px; ">
+                                    <table class="table" style="width: 100%;margin-top: 5px; ">
+                                        <tr>
+                                            <td style="width: 200px;">Country <span style="color: red;">*</span></td>
+                                            <td colspan="2"></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr><td colspan="3">WEBSITE</td></tr>
+
+                            <tr style="border: 1px solid #0000cc;">
+                                <td colspan="3" style="border: 1px solid #0081ff;marregiongin-top: 5px; ">
+                                    <table class="table" style="width: 100%;margin-top: 5px; ">
+                                        <tr>
+                                            <td style="width: 200px;">Country <span style="color: red;">*</span></td>
+                                            <td colspan="2"></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+
+                            <tr><td colspan="3">SOCIAL MEDIA</td></tr>
+
+                            <tr style="border: 1px solid #0000cc;">
+                                <td colspan="3" style="border: 1px solid #0081ff;marregiongin-top: 5px; ">
+                                    <table class="table" style="width: 100%;margin-top: 5px; ">
+                                        <tr>
+                                            <td style="width: 200px;">Country <span style="color: red;">*</span></td>
+                                            <td colspan="2"></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+
+                            <tr><td colspan="3">MOBILE NETWORK</td></tr>
+
+                            <tr style="border: 1px solid #0000cc;">
+                                <td colspan="3" style="border: 1px solid #0081ff;marregiongin-top: 5px; ">
+                                    <table class="table" style="width: 100%;margin-top: 5px; ">
+                                        <tr>
+                                            <td style="width: 200px;">Country <span style="color: red;">*</span></td>
+                                            <td colspan="2"></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr><td colspan="3">BUISNESS HOUR</td></tr>
+
+                            <tr style="border: 1px solid #0000cc;">
+                                <td colspan="3" style="border: 1px solid #0081ff;marregiongin-top: 5px; ">
+                                    <table class="table" style="width: 100%;margin-top: 5px; ">
+                                        <tr>
+                                            <td style="width: 200px;">Country <span style="color: red;">*</span></td>
+                                            <td colspan="2"></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+
+
                         </table>
                     </div>
                     <!-- /.box-body -->
@@ -281,6 +521,45 @@ $business_type_json = isset($row->business_type_json)?json_decode($row->business
     }
 
     jQuery(document).ready(function() {
+
+        runSelect2address($('.country'),'','country');
+        @if($id > 0)
+        runSelect2address($('.province'),$('.country').val(),'province');
+        runSelect2address($('.district'),$('.province'),'district');
+        runSelect2address($('.commune'),$('.district'),'commune');
+        @endif
+
+        $('body').delegate('.country','change',function (e) {
+            var  country = $(this).val();
+
+            $('.province').html('<option value=""></option>');
+            $('.district').html('<option value=""></option>');
+            $('.commune').html('<option value=""></option>');
+
+            runSelect2address($('.province'),country,'province');
+        });
+
+        $('body').delegate('.province','change',function (e) {
+            var  province = $(this).val();
+
+            $('.district').html('<option value=""></option>');
+            $('.commune').html('<option value=""></option>');
+
+            runSelect2address($('.district'),province,'district');
+        });
+
+
+        $('body').delegate('.district','change',function (e) {
+            var  district = $(this).val();
+
+            $('.commune').html('<option value=""></option>');
+            runSelect2address($('.commune'),district,'commune');
+        });
+
+
+
+
+
         @if(count($business_type_json) > 0)
             $('.business_category_id').each(function () {
                 runSelect2($(this));
@@ -311,6 +590,8 @@ $business_type_json = isset($row->business_type_json)?json_decode($row->business
              runSelect2(p.find('.channel-intermediary'));
              runSelect2(p.find('.business-function'));
          });
+
+
 
         $('body').delegate('.add-b-category','click',function (e) {
             e.preventDefault();
@@ -376,6 +657,50 @@ $business_type_json = isset($row->business_type_json)?json_decode($row->business
         });
 
     }
+
+
+    function runSelect2address(obj,ref,select_type) {
+        var placeholder = obj.data('placeholder');
+        var url = obj.data('url');
+        var multiple = (obj.data('multiple')-0>0) ? true : false;
+        //alert(category);
+        obj.select2({
+            theme: 'bootstrap',
+            multiple: multiple,
+            placeholder: placeholder,
+            minimumInputLength: "0",
+            ajax: {
+                url: url,
+                dataType: 'json',
+                quietMillis: 250,
+                data: function (params) {
+                    return {
+                        q: params.term, // search term
+                        page: params.page,
+                        ref:ref,
+                        select_type:select_type
+                    };
+                },
+                processResults: function (data, params) {
+                    params.page = params.page || 1;
+
+                    return {
+                        results: $.map(data.data, function (item) {
+                            //console.log(item);
+                            return {
+                                text: item.title,
+                                id: item.id
+                            }
+                        }),
+                        more: data.current_page < data.last_page
+                    };
+                },
+                //cache: true
+            },
+        });
+
+    }
+
 
 </script>
 @endsection
