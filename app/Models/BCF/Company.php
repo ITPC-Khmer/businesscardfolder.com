@@ -63,14 +63,16 @@ class Company extends Model
         $m->commune_id = $request->commune_id;
         $m->address = $request->address;
 
-        $m->email = $request->email;
+
         $m->fax = $request->fax;
         $m->website = $request->website;
 
         $m->mobile_number = json_encode($request->mobile_number);
         $m->telephone_number = json_encode($request->telephone_number);
+        $m->email = json_encode($request->email);
         $m->social_media = json_encode($request->social_media);
         $m->mobile_network = json_encode($request->mobile_network);
+        $m->working_hours = json_encode($request->working_hours);
 
 
         return $m->save() ? $m : null;

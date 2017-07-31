@@ -9,12 +9,15 @@ $district_id = isset($row->district_id)?$row->district_id:'';
 $commune_id = isset($row->district_id)?$row->commune_id:'';
 $address = isset($row->address)?$row->address:'';
 
-
+$fax = isset($row->fax)?$row->fax:'';
+$website = isset($row->website)?$row->website:'';
 
 $mobile_number = isset($row->mobile_number)?json_decode($row->mobile_number,true):[];
 $telephone_number = isset($row->telephone_number)?json_decode($row->telephone_number,true):[];
+$email = isset($row->email)?json_decode($row->email,true):[];
 $social_media = isset($row->social_media)?json_decode($row->social_media,true):[];
 $mobile_network = isset($row->mobile_network)?json_decode($row->mobile_network,true):[];
+$working_hours = isset($row->working_hours)?json_decode($row->working_hours,true):[];
 
 ?>
 @extends('backpack::layout')
@@ -39,9 +42,9 @@ $mobile_network = isset($row->mobile_network)?json_decode($row->mobile_network,t
                 {!! csrf_field() !!}
                 <input type="hidden" name="id" value="{{ $id }}">
                 <div class="box">
-                    <div class="box-header">
+                    {{--<div class="box-header">
                         <h3 class="box-title">HEAD OFFICE BUSINESS CARD REGISTRATION FORM</h3>
-                    </div>
+                    </div>--}}
                     <!-- /.box-header -->
                     <div class="box-body no-padding">
                         <table class="table table-condensed tbl-p">
@@ -164,7 +167,8 @@ $mobile_network = isset($row->mobile_network)?json_decode($row->mobile_network,t
                                     </tbody>
                                 @endforeach
                             @endif
-
+                        </table>
+                        <table class="table">
                             <tr><td colspan="3">BUSINESS ADDRESS</td></tr>
 
                             <tr style="border: 1px solid #0000cc;">
@@ -307,10 +311,21 @@ $mobile_network = isset($row->mobile_network)?json_decode($row->mobile_network,t
                             <tr style="border: 1px solid #0000cc;">
                                 <td colspan="3" style="border: 1px solid #0081ff;marregiongin-top: 5px; ">
                                     <table class="table" style="width: 100%;margin-top: 5px; ">
-                                        <tr>
-                                            <td style="width: 200px;">Country <span style="color: red;">*</span></td>
-                                            <td colspan="2"></td>
-                                        </tr>
+                                        @php
+                                            $telephone = \App\Models\Telephone::all();
+                                        @endphp
+                                        @if(count($telephone)>0)
+                                            @foreach($telephone as $row)
+                                                <tr>
+                                                    <td style="width: 200px;">{{ $row->company_name }}</td>
+                                                    <td colspan="2">
+                                                        <input type="hidden" name="telephone_number[{{ $row->id }}][id]" value="{{ $row->id }}">
+                                                        <input type="hidden" name="telephone_number[{{ $row->id }}][key]" value="{{ $row->company_name }}">
+                                                        <input class="form-control" type="text" name="telephone_number[{{ $row->id }}][value]" value="{{ isset($telephone_number[$row->id]['value'])?$telephone_number[$row->id]['value']:'' }}">
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
                                     </table>
                                 </td>
                             </tr>
@@ -320,8 +335,10 @@ $mobile_network = isset($row->mobile_network)?json_decode($row->mobile_network,t
                                 <td colspan="3" style="border: 1px solid #0081ff;marregiongin-top: 5px; ">
                                     <table class="table" style="width: 100%;margin-top: 5px; ">
                                         <tr>
-                                            <td style="width: 200px;">Country <span style="color: red;">*</span></td>
-                                            <td colspan="2"></td>
+                                            <td style="width: 200px;">Fax</td>
+                                            <td colspan="2">
+                                                <input class="form-control" type="text" name="fax" value="{{ $fax }}">
+                                            </td>
                                         </tr>
                                     </table>
                                 </td>
@@ -331,10 +348,21 @@ $mobile_network = isset($row->mobile_network)?json_decode($row->mobile_network,t
                             <tr style="border: 1px solid #0000cc;">
                                 <td colspan="3" style="border: 1px solid #0081ff;marregiongin-top: 5px; ">
                                     <table class="table" style="width: 100%;margin-top: 5px; ">
-                                        <tr>
-                                            <td style="width: 200px;">Country <span style="color: red;">*</span></td>
-                                            <td colspan="2"></td>
-                                        </tr>
+                                        @php
+                                            $email_company = \App\Models\Email_company::all();
+                                        @endphp
+                                        @if(count($email_company)>0)
+                                            @foreach($email_company as $row)
+                                                <tr>
+                                                    <td style="width: 200px;">{{ $row->company_name }}</td>
+                                                    <td colspan="2">
+                                                        <input type="hidden" name="email[{{ $row->id }}][id]" value="{{ $row->id }}">
+                                                        <input type="hidden" name="email[{{ $row->id }}][key]" value="{{ $row->company_name }}">
+                                                        <input class="form-control" type="text" name="email[{{ $row->id }}][value]" value="{{ isset($email[$row->id]['value'])?$email[$row->id]['value']:'' }}">
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
                                     </table>
                                 </td>
                             </tr>
@@ -344,8 +372,11 @@ $mobile_network = isset($row->mobile_network)?json_decode($row->mobile_network,t
                                 <td colspan="3" style="border: 1px solid #0081ff;marregiongin-top: 5px; ">
                                     <table class="table" style="width: 100%;margin-top: 5px; ">
                                         <tr>
-                                            <td style="width: 200px;">Country <span style="color: red;">*</span></td>
-                                            <td colspan="2"></td>
+                                            <td style="width: 200px;">Web</td>
+                                            <td colspan="2">
+
+                                                <input class="form-control" type="text" name="website" value="{{ $website }}">
+                                            </td>
                                         </tr>
                                     </table>
                                 </td>
@@ -356,10 +387,21 @@ $mobile_network = isset($row->mobile_network)?json_decode($row->mobile_network,t
                             <tr style="border: 1px solid #0000cc;">
                                 <td colspan="3" style="border: 1px solid #0081ff;marregiongin-top: 5px; ">
                                     <table class="table" style="width: 100%;margin-top: 5px; ">
-                                        <tr>
-                                            <td style="width: 200px;">Country <span style="color: red;">*</span></td>
-                                            <td colspan="2"></td>
-                                        </tr>
+                                        @php
+                                            $social_media_company = \App\Models\Social_media::all();
+                                        @endphp
+                                        @if(count($social_media_company)>0)
+                                            @foreach($social_media_company as $row)
+                                                <tr>
+                                                    <td style="width: 200px;">{{ $row->company_name }}</td>
+                                                    <td colspan="2">
+                                                        <input type="hidden" name="social_media[{{ $row->id }}][id]" value="{{ $row->id }}">
+                                                        <input type="hidden" name="social_media[{{ $row->id }}][key]" value="{{ $row->company_name }}">
+                                                        <input class="form-control" type="text" name="social_media[{{ $row->id }}][value]" value="{{ isset($social_media[$row->id]['value'])?$social_media[$row->id]['value']:'' }}">
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
                                     </table>
                                 </td>
                             </tr>
@@ -369,10 +411,21 @@ $mobile_network = isset($row->mobile_network)?json_decode($row->mobile_network,t
                             <tr style="border: 1px solid #0000cc;">
                                 <td colspan="3" style="border: 1px solid #0081ff;marregiongin-top: 5px; ">
                                     <table class="table" style="width: 100%;margin-top: 5px; ">
-                                        <tr>
-                                            <td style="width: 200px;">Country <span style="color: red;">*</span></td>
-                                            <td colspan="2"></td>
-                                        </tr>
+                                        @php
+                                            $mobile_network_company = \App\Models\Mobile_network::all();
+                                        @endphp
+                                        @if(count($mobile_network_company)>0)
+                                            @foreach($mobile_network_company as $row)
+                                                <tr>
+                                                    <td style="width: 200px;">{{ $row->company_name }}</td>
+                                                    <td colspan="2">
+                                                        <input type="hidden" name="mobile_network[{{ $row->id }}][id]" value="{{ $row->id }}">
+                                                        <input type="hidden" name="mobile_network[{{ $row->id }}][key]" value="{{ $row->company_name }}">
+                                                        <input class="form-control" type="text" name="mobile_network[{{ $row->id }}][value]" value="{{ isset($mobile_network[$row->id]['value'])?$mobile_network[$row->id]['value']:'' }}">
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
                                     </table>
                                 </td>
                             </tr>
@@ -381,10 +434,27 @@ $mobile_network = isset($row->mobile_network)?json_decode($row->mobile_network,t
                             <tr style="border: 1px solid #0000cc;">
                                 <td colspan="3" style="border: 1px solid #0081ff;marregiongin-top: 5px; ">
                                     <table class="table" style="width: 100%;margin-top: 5px; ">
-                                        <tr>
-                                            <td style="width: 200px;">Country <span style="color: red;">*</span></td>
-                                            <td colspan="2"></td>
-                                        </tr>
+                                        @php
+                                            $days_of_week = array(
+                                                        'Monday',
+                                                        'Tuesday',
+                                                        'Wednesday',
+                                                        'Thursday',
+                                                        'Friday',
+                                                        'Saturday',
+                                                        'Sunday'
+                                                    );
+                                        @endphp
+
+                                        @foreach($days_of_week as $k=>$v)
+                                            <tr>
+                                                <td style="width: 200px;">{{ $v }}</td>
+                                                <td colspan="2">
+                                                    <input type="hidden" name="working_hours[{{ $k }}][key]" value="{{ $v }}">
+                                                    <input class="form-control" type="text" name="working_hours[{{ $k }}][value]" value="{{ isset($working_hours[$k]['value'])?$working_hours[$k]['value']:'' }}">
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </table>
                                 </td>
                             </tr>
