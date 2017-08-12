@@ -23,6 +23,14 @@ class Department extends Model
     // protected $hidden = [];
     // protected $dates = [];
 
+    static function getTitle($id)
+    {
+        $m = self::find($id);
+
+        return $m != null ? $m->title : '';
+
+    }
+
     /*
     |--------------------------------------------------------------------------
     | FUNCTIONS

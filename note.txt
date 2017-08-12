@@ -22,6 +22,10 @@ Examples:
 
 php artisan iseed my_table
 php artisan iseed my_table,another_table
+
+php artisan iseed cl_business_categories,cl_business_types
+php artisan iseed cl_business_categories,cl_business_types
+
 force
 
 Optional parameter which is used to automatically overwrite any existing seeds for desired tables

@@ -64,7 +64,11 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+//    'timezone' => 'UTC',
+//    'timezone' => 'Asia/Bangkok',
+    'timezone' => 'Asia/Phnom_Penh',
+    //http://www.zeitverschiebung.net/en/clock-widget?timezone=Asia/Phnom_Penh&type=timezone&id=Asia/Phnom_Penh
+
 
     /*
     |--------------------------------------------------------------------------
