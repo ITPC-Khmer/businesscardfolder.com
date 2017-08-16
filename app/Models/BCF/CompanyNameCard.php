@@ -4,10 +4,13 @@ namespace App\Models\BCF;
 
 use App\Models\Department;
 use App\Models\Position;
+use Backpack\CRUD\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class CompanyNameCard extends Model
 {
+    use CrudTrait;
+
     protected $table = 'company_name_cards';
 
     protected $appends = ['department','position'];
@@ -54,7 +57,6 @@ class CompanyNameCard extends Model
     public function getDepartmentAttribute()
     {
        return Department::getTitle($this->department_id);
-
     }
 
     public function getPositionAttribute()

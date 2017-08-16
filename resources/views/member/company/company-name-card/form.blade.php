@@ -25,8 +25,6 @@ $mobile_network = isset($row->mobile_network)?json_decode($row->mobile_network,t
 
 $code = '';
 
-
-
 ?>
 @extends('backpack::layout')
 
@@ -57,12 +55,82 @@ $code = '';
                     <div class="box-body no-padding">
 
                         <table class="table">
-                            <tr><td colspan="3">BUSINESS ADDRESS</td></tr>
+                            <tr><td colspan="3">INFORMATION</td></tr>
 
                             <tr style="border: 1px solid #0000cc;">
                                 <td colspan="3" style="border: 1px solid #0081ff;marregiongin-top: 5px; ">
+                                    <table class="table" style="width: 100%;margin-top: 5px; ">
+                                        <tr>
+                                            <td style="width: 200px;">ID Number</td>
+                                            <td colspan="2">
+                                                 <input class="form-control" name="id_number" value="{{$id_number}}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 200px;">Passport Number</td>
+                                            <td colspan="2">
+                                                 <input class="form-control" name="passport_number" value="{{$passport_number}}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 200px;">Given Name</td>
+                                            <td colspan="2">
+                                                 <input class="form-control" name="given_name" value="{{$given_name}}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 200px;">Family Name</td>
+                                            <td colspan="2">
+                                                 <input class="form-control" name="family_name" value="{{$family_name}}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 200px;">Married Status</td>
+                                            <td colspan="2">
+                                                @php
 
+                                                           $field = [   // Enum
+                                                                    'name' => 'married_status',
+                                                                    'label' => 'Status',
+                                                                    'type' => 'enum',
+                                                                    'model' => '\App\Models\BCF\CompanyNameCard',
+                                                                ];
+                                                @endphp
+                                                @include('vendor.backpack.crud.my.enum2', compact('field'))
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 200px;">Gender</td>
+                                            <td colspan="2">
+                                                @php
 
+                                                    $field = [   // Enum
+                                                             'name' => 'sex',
+                                                             'label' => 'Sex',
+                                                             'type' => 'enum',
+                                                             'model' => '\App\Models\BCF\CompanyNameCard',
+                                                         ];
+                                                @endphp
+                                                @include('vendor.backpack.crud.my.enum2', compact('field'))
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 200px;">Department</td>
+                                            <td colspan="2">
+                                                <select name="department_id"  class="form-control department_id" >
+                                                    <option value="0"></option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 200px;">Position</td>
+                                            <td colspan="2">
+                                                <select name="position_id"  class="form-control position_id" >
+                                                    <option value="0"></option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
 
                             </tr>
@@ -269,7 +337,6 @@ $code = '';
 
         });
 
-
         function runSelect2(obj) {
             var placeholder = obj.data('placeholder');
             var url = obj.data('url');
@@ -311,50 +378,6 @@ $code = '';
             });
 
         }
-
-
-        function runSelect2address(obj,ref,select_type) {
-            var placeholder = obj.data('placeholder');
-            var url = obj.data('url');
-            var multiple = (obj.data('multiple')-0>0) ? true : false;
-            //alert(category);
-            obj.select2({
-                theme: 'bootstrap',
-                multiple: multiple,
-                placeholder: placeholder,
-                minimumInputLength: "0",
-                ajax: {
-                    url: url,
-                    dataType: 'json',
-                    quietMillis: 250,
-                    data: function (params) {
-                        return {
-                            q: params.term, // search term
-                            page: params.page,
-                            ref:ref,
-                            select_type:select_type
-                        };
-                    },
-                    processResults: function (data, params) {
-                        params.page = params.page || 1;
-
-                        return {
-                            results: $.map(data.data, function (item) {
-                                //console.log(item);
-                                return {
-                                    text: item.title,
-                                    id: item.id
-                                }
-                            }),
-                            more: data.current_page < data.last_page
-                        };
-                    },
-                    //cache: true
-                },
-            });
-
-        }
-
 
     </script>
 @endsection
