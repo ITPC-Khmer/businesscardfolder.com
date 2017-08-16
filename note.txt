@@ -25,6 +25,8 @@ php artisan iseed my_table,another_table
 
 php artisan iseed cl_business_categories,cl_business_types
 php artisan iseed countries,provinces,districts,communes
+php artisan iseed telephone_companies,social_media
+php artisan iseed mobile_networks,mobile_companies,email_companies
 
 force
 
