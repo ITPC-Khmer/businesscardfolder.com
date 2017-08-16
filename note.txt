@@ -24,7 +24,7 @@ php artisan iseed my_table
 php artisan iseed my_table,another_table
 
 php artisan iseed cl_business_categories,cl_business_types
-php artisan iseed cl_business_categories,cl_business_types
+php artisan iseed countries,provinces,districts,communes
 
 force
 
