@@ -13,3 +13,7 @@ Route::get('/bcf-intermediary', 'Api\CompanyApiController@getIntermediaryAjax');
 
 
 Route::get('/bcf-get-address', 'Api\CompanyApiController@getAddressAjax');
+
+
+Route::get('/bcf-get-department', 'Api\CompanyApiController@getDepartmentAjax');
+Route::get('/bcf-get-position', 'Api\CompanyApiController@getPositionAjax');

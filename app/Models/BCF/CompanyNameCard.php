@@ -17,40 +17,58 @@ class CompanyNameCard extends Model
 
     public static function saveData($request)
     {
+        $member_id =  getMember2ID();
 
-        $id = $request->id;
-        $m = $id > 0 ? self::find($id) : new Company();
-        $m->member_id = getMember2ID();
+        if($member_id > 0) {
 
-        $m->company_id = $request->company_id;
-        $m->id_number = $request->id_number;
-        $m->passport_number = $request->passport_number;
-        $m->given_name = $request->given_name;
-        $m->family_name = $request->family_name;
-        $m->married_status = $request->married_status;
-        $m->sex = $request->sex;
-        $m->department_id = $request->department_id;
-        $m->position_id = $request->position_id;
+            $id = $request->id;
+            $m = $id > 0 ? self::where('member_id', $member_id)->where('id',$id)->first() : new CompanyNameCard();
 
-        $m->mobile_number = json_decode($request->mobile_number);
-        $m->telephone_number = json_decode($request->telephone_number);
-        $m->email = json_encode($request->email);
+            if ($m == null && $id > 0 ) { return null;  }
 
-        $m->fax = $request->fax;
-        $m->website = $request->website;
+            $m->member_id = $member_id;
 
-        $m->social_media = json_encode($request->social_media);
-        $m->mobile_network = json_encode($request->mobile_network);
+            //get company id
+            $mc = Company::where('member_id', $member_id)->first();
 
-        $m->card_vertical = $request->card_vertical;
-        $m->card_horizontal = $request->card_horizontal;
+            if ($mc != null ) {
+                $m->company_id = $mc->id;
+            } else {
+                return null;
+            }
 
-        $m->id_image = $request->id_image;
-        $m->passport_image = $request->passport_image;
-        $m->photo = $request->photo;
-        $m->status = $request->status;
 
-        return $m->save() ? $m : null;
+            $m->id_number = $request->id_number;
+            $m->passport_number = $request->passport_number;
+            $m->given_name = $request->given_name;
+            $m->family_name = $request->family_name;
+            $m->married_status = $request->married_status;
+            $m->sex = $request->sex;
+            $m->department_id = $request->department_id;
+            $m->position_id = $request->position_id;
+
+            $m->mobile_number = json_encode($request->mobile_number);
+            $m->telephone_number = json_encode($request->telephone_number);
+            $m->email = json_encode($request->email);
+
+            $m->fax = $request->fax;
+            $m->website = $request->website;
+
+            $m->social_media = json_encode($request->social_media);
+            $m->mobile_network = json_encode($request->mobile_network);
+
+            $m->card_vertical = $request->card_vertical;
+            $m->card_horizontal = $request->card_horizontal;
+
+            $m->id_image = $request->id_image;
+            $m->passport_image = $request->passport_image;
+            $m->photo = $request->photo;
+            $m->status = $request->status;
+
+            return $m->save() ? $m : null;
+        }else{
+            return null;
+        }
 
     }
 

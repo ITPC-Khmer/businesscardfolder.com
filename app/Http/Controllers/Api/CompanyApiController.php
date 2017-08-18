@@ -8,7 +8,9 @@ use App\Models\Business_intermediary;
 use App\Models\Business_type;
 use App\Models\Commune;
 use App\Models\Country;
+use App\Models\Department;
 use App\Models\District;
+use App\Models\Position;
 use App\Models\Province;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -140,6 +142,43 @@ class CompanyApiController extends Controller
 
         return $results;
     }
+
+    function getDepartmentAjax(Request $request)
+    {
+        $search_term = $request->input('q');
+        $page = $request->input('page');
+
+        if ($search_term)
+        {
+            $results = Department::where('title', 'LIKE', '%'.$search_term.'%')->paginate(100);
+        }
+        else
+        {
+            $results = Department::paginate(100);
+        }
+
+        return $results;
+    }
+
+    function getPositionAjax(Request $request)
+    {
+        $search_term = $request->input('q');
+        $page = $request->input('page');
+        $department_id = $request->input('department_id');
+
+        if ($search_term)
+        {
+            $results = Position::where('department_id',$department_id)
+                ->where('title', 'LIKE', '%'.$search_term.'%')->paginate(100);
+        }
+        else
+        {
+            $results = Position::where('department_id',$department_id)->paginate(100);
+        }
+
+        return $results;
+    }
+
 
 
 }

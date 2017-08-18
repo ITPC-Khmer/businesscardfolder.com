@@ -19,11 +19,11 @@ $id = 0;
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <div class="box-body">
+            <div class="box-body" style="background-color: #fff;">
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th style="width: 10px">#</th>
+                            <th style="width: 130px"></th>
                             <th>Name</th>
                             <th>Sex</th>
                             <th>Status</th>
@@ -35,7 +35,10 @@ $id = 0;
                     <tbody>
                     @foreach($rows as $row)
                         <tr>
-                            <td>1.</td>
+                            <td>
+                                <a href="{{ url('bcf/'.create_code_number(getMember2ID()).'/head-office-business-card-edit?id='.$row->id ) }}" class="btn btn-xs btn-default"><i class="fa fa-edit"></i> Edit</a>
+                                <a href="{{ url('bcf/'.create_code_number(getMember2ID()).'/head-office-business-card-delete?id='.$row->id ) }}" class="btn btn-xs btn-default" data-button-type="delete"><i class="fa fa-trash"></i> Delete</a>
+                            </td>
                             <td>{{ $row->given_name }}</td>
                             <td>{{ $row->sex }}</td>
                             <td>{{ $row->married_status }}</td>

@@ -25,6 +25,13 @@ $mobile_network = isset($row->mobile_network)?json_decode($row->mobile_network,t
 
 $code = '';
 
+
+$card_vertical = isset($row->card_vertical)?$row->card_vertical:'';
+$card_horizontal = isset($row->card_horizontal)?$row->card_horizontal:'';
+$id_image = isset($row->id_image)?$row->id_image:'';
+$passport_image = isset($row->passport_image)?$row->passport_image:'';
+$photo = isset($row->photo)?$row->photo:'';
+
 ?>
 @extends('backpack::layout')
 
@@ -44,9 +51,10 @@ $code = '';
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <form action="" method="post" enctype="multipart/form-data">
+            <form action="{{ url('bcf/'.create_code_number(getMember2ID()).'/head-office-business-card-form') }}" method="post" enctype="multipart/form-data">
                 {!! csrf_field() !!}
                 <input type="hidden" name="id" value="{{ $id }}">
+                <input type="hidden" name="company_id" value="{{ $company_id }}">
                 <div class="box">
                 {{--<div class="box-header">
                     <h3 class="box-title">HEAD OFFICE BUSINESS CARD REGISTRATION FORM</h3>
@@ -91,7 +99,7 @@ $code = '';
 
                                                            $field = [   // Enum
                                                                     'name' => 'married_status',
-                                                                    'label' => 'Status',
+                                                                    'label' => 'Married Status',
                                                                     'type' => 'enum',
                                                                     'model' => '\App\Models\BCF\CompanyNameCard',
                                                                 ];
@@ -115,9 +123,24 @@ $code = '';
                                             </td>
                                         </tr>
                                         <tr>
+                                            <td style="width: 200px;">Status</td>
+                                            <td colspan="2">
+                                                @php
+
+                                                    $field = [   // Enum
+                                                             'name' => 'status',
+                                                             'label' => 'Status',
+                                                             'type' => 'enum',
+                                                             'model' => '\App\Models\BCF\CompanyNameCard',
+                                                         ];
+                                                @endphp
+                                                @include('vendor.backpack.crud.my.enum2', compact('field'))
+                                            </td>
+                                        </tr>
+                                        <tr>
                                             <td style="width: 200px;">Department</td>
                                             <td colspan="2">
-                                                <select name="department_id"  class="form-control department_id" >
+                                                <select name="department_id"  class="form-control department_id" data-url="{{ url('api/bcf-get-department') }}">
                                                     <option value="0"></option>
                                                     @php
                                                        $rows_op = \App\Models\Department::orderBy('title','asc')->get();
@@ -133,10 +156,10 @@ $code = '';
                                         <tr>
                                             <td style="width: 200px;">Position</td>
                                             <td colspan="2">
-                                                <select name="position_id"  class="form-control position_id" >
+                                                <select name="position_id"  class="form-control position_id" data-url="{{ url('api/bcf-get-position') }}">
                                                     <option value="0"></option>
                                                     @php
-                                                        $rows_op = \App\Models\Position::orderBy('title','asc')->get();
+                                                        $rows_op = \App\Models\Position::where('department_id',$department_id)->orderBy('title','asc')->get();
                                                     @endphp
                                                     @if(count($rows_op)>0)
                                                         @foreach($rows_op as $row)
@@ -300,12 +323,84 @@ $code = '';
                                     </table>
                                 </td>
                             </tr>
-                            <tr><td colspan="3">BUISNESS HOUR</td></tr>
+
+
 
 
                         </table>
                     </div>
                     <!-- /.box-body -->
+
+                    <!-- /.box-header -->
+                    <div class="box-body no-padding">
+
+                        @include('vendor.backpack.crud.my.image2', array('field' =>
+                        ['default' => asset($card_vertical!=''?$card_vertical:'no-image.png'),
+                            'is_first' => 1,
+                            'label' => "card_vertical",
+                            'name' => "card_vertical",
+                            'type' => 'image2',
+                            'upload' => true,
+                            'crop' => true, // set to true to allow cropping, false to disable
+                            'aspect_ratio' => 3/2, // ommit or set to 0 to allow any aspect ratio
+                         ]))
+
+                        @include('vendor.backpack.crud.my.image2', array('field' =>
+                        ['default' => asset($card_horizontal!=''?$card_horizontal:'no-image.png'),
+                            'is_first' => 0,
+                            'label' => "card_horizontal",
+                            'name' => "card_horizontal",
+                            'type' => 'image2',
+                            'upload' => true,
+                            'crop' => true, // set to true to allow cropping, false to disable
+                            'aspect_ratio' => 3/4, // ommit or set to 0 to allow any aspect ratio
+                         ]))
+
+                    </div>
+                         <!-- /.box-header -->
+                    <div class="box-body no-padding">
+
+                      {{--  $card_vertical = isset($row->card_vertical)?$row->card_vertical:'';
+                        $card_horizontal = isset($row->card_horizontal)?$row->card_horizontal:'';
+                        $id_image = isset($row->id_image)?$row->id_image:'';
+                        $passport_image = isset($row->passport_image)?$row->passport_image:'';
+                        $photo = isset($row->photo)?$row->photo:'';--}}
+
+                        @include('vendor.backpack.crud.my.image2', array('field' =>
+                        ['default' => asset($id_image!=''?$id_image:'no-image.png'),
+                            'is_first' => 0,
+                            'label' => "id_image",
+                            'name' => "id_image",
+                            'type' => 'image2',
+                            'upload' => true,
+                            'crop' => true, // set to true to allow cropping, false to disable
+                            'aspect_ratio' => 0, // ommit or set to 0 to allow any aspect ratio
+                         ]))
+
+                        @include('vendor.backpack.crud.my.image2', array('field' =>
+                        ['default' => asset($passport_image!=''?$passport_image:'no-image.png'),
+                            'is_first' => 0,
+                            'label' => "passport_image",
+                            'name' => "passport_image",
+                            'type' => 'image2',
+                            'upload' => true,
+                            'crop' => true, // set to true to allow cropping, false to disable
+                            'aspect_ratio' => 0, // ommit or set to 0 to allow any aspect ratio
+                         ]))
+
+                        @include('vendor.backpack.crud.my.image2', array('field' =>
+                        ['default' => asset($photo!=''?$photo:'no-image.png'),
+                            'is_first' => 0,
+                            'label' => "photo",
+                            'name' => "photo",
+                            'type' => 'image2',
+                            'upload' => true,
+                            'crop' => true, // set to true to allow cropping, false to disable
+                            'aspect_ratio' => 1, // ommit or set to 0 to allow any aspect ratio
+                         ]))
+
+                    </div>
+
                 </div>
                 <!-- /.box -->
 
@@ -322,7 +417,7 @@ $code = '';
 
                         </div>
 
-                        <a href="{{ url("bcf/{$code}") }}" class="btn btn-default"><span class="fa fa-ban"></span> &nbsp;Cancel</a>
+                        <a href="{{ url('bcf/'.create_code_number(getMember2ID()).'/head-office-business-card-list' ) }}" class="btn btn-default"><span class="fa fa-ban"></span> &nbsp;Cancel</a>
                     </div>
                 </div><!-- /.box-footer-->
             </form>
@@ -334,6 +429,8 @@ $code = '';
 {{-- FIELD CSS - will be loaded in the after_styles section --}}
 @section('after_styles')
     @parent
+
+    @stack('crud_fields_styles')
     <!-- include select2 css-->
     <link href="{{ asset('vendor/adminlte/plugins/select2/select2.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -345,19 +442,30 @@ $code = '';
 @section('after_scripts')
     @parent
 
+    @stack('crud_fields_scripts')
+    <script>
+
+
+    </script>
     <!-- include select2 js-->
     <script src="{{ asset('vendor/adminlte/plugins/select2/select2.min.js') }}"></script>
     <script>
 
         jQuery(document).ready(function() {
+            runSelect2($('.department_id'));
+            runSelect2($('.position_id'));
 
+            $('.department_id').on('change',function () {
+                $('.position_id').val(0);
+                runSelect2($('.position_id'));
+            });
         });
 
         function runSelect2(obj) {
             var placeholder = obj.data('placeholder');
             var url = obj.data('url');
-            var multiple = (obj.data('multiple')-0>0) ? true : false;
-            var category = obj.data('category')?obj.data('category'):'';
+            var multiple = false;
+            var department_id = $('.department_id').val();
             //alert(category);
             obj.select2({
                 theme: 'bootstrap',
@@ -372,7 +480,7 @@ $code = '';
                         return {
                             q: params.term, // search term
                             page: params.page,
-                            category:category
+                            department_id:department_id
                         };
                     },
                     processResults: function (data, params) {

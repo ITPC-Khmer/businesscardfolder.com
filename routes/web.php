@@ -29,6 +29,9 @@ Route::group(['prefix' => 'bcf',
 
     Route::get('/{code}/head-office-business-card-list','CompanyNameCardController@index');
     Route::get('/{code}/head-office-business-card-form','CompanyNameCardController@form');
+    Route::get('/{code}/head-office-business-card-edit','CompanyNameCardController@form');
+    Route::get('/{code}/head-office-business-card-delete','CompanyNameCardController@delete');
+
     Route::post('/{code}/head-office-business-card-form','CompanyNameCardController@save');
 
     //======================================================
@@ -103,7 +106,5 @@ Route::group([
 
     //===================================================
     //===================================================
-
-
 
 });

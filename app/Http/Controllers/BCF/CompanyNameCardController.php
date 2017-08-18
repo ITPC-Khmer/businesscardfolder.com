@@ -29,8 +29,9 @@ class CompanyNameCardController extends Controller
                 }
 
                 $rows = CompanyNameCard::where('member_id', getMember2ID())
-                    ->where('company_id',$this->company_id)
+                    //->where('company_id',$this->company_id)
                     ->paginate(20);
+
 
                 return view('member.company.company-name-card.index',['rows'=>$rows]);
 
@@ -87,6 +88,25 @@ class CompanyNameCardController extends Controller
 
     }
 
+    function delete(Request $request)
+    {
+        $member_id =  getMember2ID();
 
+        if($member_id > 0) {
+
+            $id = $request->id;
+            $m = CompanyNameCard::where('member_id', $member_id)->where('id',$id)->first() ;
+
+            if($m != null)
+            {
+                $m->delete();
+            }
+
+        }
+
+        return redirect()->back();
+
+
+    }
 
 }
