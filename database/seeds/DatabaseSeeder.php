@@ -23,5 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call(MobileNetworksTableSeeder::class);
         $this->call(MobileCompaniesTableSeeder::class);
         $this->call(EmailCompaniesTableSeeder::class);
+        $this->call(HrDepartmentsTableSeeder::class);
+        $this->call(HrPositionsTableSeeder::class);
     }
 }

@@ -119,6 +119,14 @@ $code = '';
                                             <td colspan="2">
                                                 <select name="department_id"  class="form-control department_id" >
                                                     <option value="0"></option>
+                                                    @php
+                                                       $rows_op = \App\Models\Department::orderBy('title','asc')->get();
+                                                    @endphp
+                                                    @if(count($rows_op)>0)
+                                                        @foreach($rows_op as $row)
+                                                            <option @if($department_id == $row->id) selected @endif value="{{$row->id}}">{{$row->title}}</option>
+                                                        @endforeach
+                                                    @endif
                                                 </select>
                                             </td>
                                         </tr>
@@ -127,6 +135,14 @@ $code = '';
                                             <td colspan="2">
                                                 <select name="position_id"  class="form-control position_id" >
                                                     <option value="0"></option>
+                                                    @php
+                                                        $rows_op = \App\Models\Position::orderBy('title','asc')->get();
+                                                    @endphp
+                                                    @if(count($rows_op)>0)
+                                                        @foreach($rows_op as $row)
+                                                            <option @if($department_id == $row->id) selected @endif value="{{$row->id}}">{{$row->title}}</option>
+                                                        @endforeach
+                                                    @endif
                                                 </select>
                                             </td>
                                         </tr>
