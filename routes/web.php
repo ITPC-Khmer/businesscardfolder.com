@@ -94,6 +94,9 @@ Route::group([
 
     CRUD::resource('itembrand', 'ItemBrandCrudController');
 
+    CRUD::resource('itemcategories', 'ItemCategoriesCrudController');
+    CRUD::resource('items', 'ItemsCrudController');
+
     //===================================================
     //===================================================
     //CRUD::resource('user', 'UserCrudController');

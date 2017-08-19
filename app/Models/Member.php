@@ -26,6 +26,13 @@ class Member extends Model
     // protected $hidden = [];
     // protected $dates = [];
 
+    public function items()
+    {
+        return $this->hasMany('App\Models\Items');
+    }
+
+
+
     public function getBusinessFormWithLink()
     {
         return '<a href="'.url('bcf/'.create_code_number( $this->id)).'">'.create_code_number($this->id).'</a>';

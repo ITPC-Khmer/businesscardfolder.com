@@ -10,6 +10,14 @@ class Company extends Model
 {
     protected $table = 'companies';
 
+
+    public function items()
+    {
+        return $this->hasMany('App\Models\Items');
+    }
+
+
+
     public static function headOfficeBusinessCardSave($request)
     {
         $id = $request->id;

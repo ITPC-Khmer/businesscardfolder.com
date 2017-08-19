@@ -56,6 +56,7 @@
             <a href="#"><i class="fa fa-university"></i> <span>Product</span> <i class="fa fa-angle-left pull-right"></i></a>
             <ul class="treeview-menu">
               <li><a href="{{ url(config('backpack.base.route_prefix').'/itembrand') }}"><i class="fa fa-file-o"></i> <span>Item Brand</span></a></li>
+              <li><a href="{{ url(config('backpack.base.route_prefix').'/itemcategories') }}"><i class="fa fa-file-o"></i> <span>Item Category</span></a></li>
            </ul>
           </li>
 
@@ -137,8 +138,7 @@
         <li><a href="{{ url('/bcf/'.create_code_number(getMember2ID()).'/head-office-business-document-upload') }}"><i class="fa fa-file-o"></i> <span>Official Document Upload</span></a></li>
         <li><a href="{{ url('/bcf/'.create_code_number(getMember2ID()).'/head-office-business-card-form') }}"><i class="fa fa-file-o"></i> <span>Departmental Name Card</span></a></li>
         <li><a href="{{ url('/bcf/'.create_code_number(getMember2ID()).'/head-office-business-card-list') }}"><i class="fa fa-file-o"></i> <span>Departmental Name Card View</span></a></li>
-
-
+        <li><a href="{{ url(config('backpack.base.route_prefix').'/items') }}"><i class="fa fa-cog"></i> <span>Product Listing</span></a></li>
         <!-- ======================================= -->
         <li class="header">{{ $getMemberInfo['name'] }}</li>
         <li><a href="{{ url('bcf/back-home') }}"><i class="fa fa-arrow-left"></i> <span>Back Home</span></a></li>

@@ -25,6 +25,14 @@ class ItemBrand extends Model
     // protected $hidden = [];
     // protected $dates = [];
 
+
+    public function items()
+    {
+        return $this->hasMany('App\Models\Items');
+    }
+
+
+
     public function setLogoAttribute($value)
     {
         $attribute_name = "logo";
