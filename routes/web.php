@@ -96,6 +96,7 @@ Route::group([
 
     CRUD::resource('itemcategories', 'ItemCategoriesCrudController');
     CRUD::resource('items', 'ItemsCrudController');
+    CRUD::resource('adv', 'AdvCrudController');
 
     //===================================================
     //===================================================

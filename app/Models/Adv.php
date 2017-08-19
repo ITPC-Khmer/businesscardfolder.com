@@ -3,55 +3,21 @@
 namespace App\Models;
 
 use App\Models\BCF\Company;
-use Backpack\CRUD\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
+use Backpack\CRUD\CrudTrait;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 
-class Items extends Model
+class Adv extends Model
 {
     use CrudTrait;
 
-
-    /*
-    |--------------------------------------------------------------------------
-    | GLOBAL VARIABLES
-    |--------------------------------------------------------------------------
-    */
-
-    protected $table = 'items';
+    protected $table = 'advertises';
     protected $primaryKey = 'id';
     public $timestamps = true;
     // protected $guarded = ['id'];
-    protected $fillable = ['member_id','company_id','category_id','brand_id','title','price','promotion_price','promotion_price_exp','show_price','content','image','item_type','condition','status','date','featured'];
-    // protected $hidden = [];
-    // protected $dates = [];
-    protected $casts = [
-        'featured'  => 'boolean',
-        'date'      => 'date',
-    ];
+    protected $fillable = ['member_id','company_id','title','description','adv_type','adv_location','image','adv_status','status','adv_page_order','adv_page_rank','adv_view','adv_click'];
 
-    /*
-    |--------------------------------------------------------------------------
-    | FUNCTIONS
-    |--------------------------------------------------------------------------
-    */
-
-    /*
-    |--------------------------------------------------------------------------
-    | RELATIONS
-    |--------------------------------------------------------------------------
-    */
-
-    public function category()
-    {
-        return $this->belongsTo('App\Models\ItemCategories', 'category_id');
-    }
-
-    public function brand()
-    {
-        return $this->belongsTo('App\Models\ItemBrand', 'brand_id');
-    }
 
     public function company()
     {
@@ -62,27 +28,6 @@ class Items extends Model
     {
         return $this->belongsTo('App\Models\Member','member_id');
     }
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | SCOPES
-    |--------------------------------------------------------------------------
-    */
-
-    public function scopePublished($query)
-    {
-        return $query->where('status', 'PUBLISHED')
-            ->where('date', '<=', date('Y-m-d'))
-            ->orderBy('date', 'DESC');
-    }
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | MUTATORS
-    |--------------------------------------------------------------------------
-    */
 
     public function setMemberIdAttribute($values)
     {
@@ -102,6 +47,7 @@ class Items extends Model
         }
 
     }
+
 
     public function setImageAttribute($values)
     {
@@ -180,5 +126,7 @@ class Items extends Model
 
         });
     }
+
+
 
 }

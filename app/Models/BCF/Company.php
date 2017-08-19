@@ -16,6 +16,11 @@ class Company extends Model
         return $this->hasMany('App\Models\Items');
     }
 
+    public function advertise()
+    {
+        return $this->hasMany('App\Models\Advertise');
+    }
+
 
 
     public static function headOfficeBusinessCardSave($request)

@@ -25,7 +25,7 @@
                     <table class="table table-striped">
                         <tr>
                             <td  style="width: 200px">USER ID</td>
-                            <td><a href="{{ url('/'.create_code_number($row->id)) }}">{{ create_code_number($row->id) }}</a></td>
+                            <td><a href="{{ url('bcf/'.create_code_number($row->id)) }}">{{ create_code_number($row->id) }}</a></td>
                             <td  style="width: 40px"></td>
                         </tr>
                         <tr>
@@ -40,7 +40,7 @@
                         </tr>
                         <tr>
                             <td  style="width: 200px">SUB DOMAIN</td>
-                            <td><a href="{{ url('/'.create_code_number($row->id)) }}">{{ url('/'.create_code_number($row->id)) }}</a></td>
+                            <td><a href="{{ url('bcf/'.create_code_number($row->id)) }}">{{ url('bcf/'.create_code_number($row->id)) }}</a></td>
                             <td  style="width: 40px"><a href="{{ url("admin/member/{$row->id}/edit") }}" class="btn btn-xs btn-default"><i class="fa fa-edit"></i> Edit</a></td>
                         </tr>
                         <tr>
