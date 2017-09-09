@@ -75,7 +75,7 @@ class MemberCrudController extends CrudController
             'name' => 'role_id',
             'label' => "Role",
             'type' => 'select2_from_array',
-            'options' => GH::getRoleArray(),
+            'options' => GH::getMemberRoleArray(),
             'allows_null' => false,
         ]);
 

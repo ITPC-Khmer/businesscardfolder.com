@@ -14,9 +14,9 @@ class CreateCompaniesTable extends Migration
     public function up()
     {
         Schema::create('companies', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
 
-            $table->integer('member_id')->index()->unique();
+            $table->bigInteger('member_id')->index();
             $table->text('business_type_json')->nullable();
             // type
             $table->string('business_category_id')->index()->nullable();

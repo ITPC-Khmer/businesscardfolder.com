@@ -13,13 +13,13 @@ class CreateMembersTable extends Migration
     public function up()
     {
         Schema::create('members', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('role_id')->index()->nullable()->default(0);
+            $table->bigIncrements('id');
+            $table->bigInteger('role_id')->index()->nullable()->default(0);
             $table->string('name')->index()->nullable();
-            $table->string('username')->unique();
-            $table->string('email')->unique();
+            $table->string('username')->nullable();
+            $table->string('email')->nullable();
             $table->string('phone')->index()->nullable();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->boolean('confirmed')->default(0);
             $table->string('confirmation_code')->nullable();
             $table->string('photo')->nullable();

@@ -1,6 +1,6 @@
 php artisan ide-helper:generate
 
-
+php artisan make:middleware CheckAge
 
 =====================================
 composer create-project --prefer-dist laravel/laravel yourprojectname
@@ -36,6 +36,11 @@ php artisan iseed countries,provinces,districts,communes
 php artisan iseed telephone_companies,social_media
 php artisan iseed mobile_networks,mobile_companies,email_companies
 php artisan iseed hr_departments,hr_positions
+php artisan iseed cl_business_intermediaries,cl_business_functions
+
+// for test ======================
+
+php artisan iseed companies,company_name_cards
 
 =============================================================================
 =============================================================================

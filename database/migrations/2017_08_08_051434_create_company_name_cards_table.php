@@ -14,10 +14,10 @@ class CreateCompanyNameCardsTable extends Migration
     public function up()
     {
         Schema::create('company_name_cards', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
 
-            $table->integer('member_id')->index()->nullable();
-            $table->integer('company_id')->index()->nullable();
+            $table->bigInteger('member_id')->index()->nullable();
+            $table->bigInteger('company_id')->index()->nullable();
 
             $table->string('id_number')->nullable();
             $table->string('passport_number')->nullable();

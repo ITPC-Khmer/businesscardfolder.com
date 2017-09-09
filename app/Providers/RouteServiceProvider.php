@@ -39,6 +39,10 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
+        $this->mapNgRoutes();
+
+        $this->mapJsonPRoutes();
+
         //
     }
 
@@ -69,5 +73,34 @@ class RouteServiceProvider extends ServiceProvider
              ->middleware('api')
              ->namespace($this->namespace)
              ->group(base_path('routes/api.php'));
+    }
+
+    /**
+     * Define the "ng" routes for the application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapNgRoutes()
+    {
+        Route::prefix('ng')
+             ->middleware(['api','cors'])
+             ->namespace($this->namespace)
+             ->group(base_path('routes/ng.php'));
+    }
+    /**
+     * Define the "ng" routes for the application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapJsonPRoutes()
+    {
+        Route::prefix('jsonp')
+             ->middleware(['api','jsonp'])
+             ->namespace($this->namespace)
+             ->group(base_path('routes/jsonp.php'));
     }
 }

@@ -2,7 +2,8 @@
 use Illuminate\Http\Request;
 
 Route::get('/', function () {
-    return view('welcome');
+    //return view('welcome');
+    return redirect('admin/login');
 });
 
 Route::group(['prefix' => 'bcf',
@@ -66,6 +67,11 @@ Route::group([
     'namespace' => 'Admin'
 ], function() {
     // your CRUD resources and other admin routes here
+    Route::any('user/change-pass','AdminUserCrudController@changePass');
+    Route::patch('user/change-pass','AdminUserCrudController@changePassSave');
+
+    CRUD::resource('adminuser', 'AdminUserCrudController');
+
     CRUD::resource('tag', 'TagCrudController');
     CRUD::resource('category', 'CategoryCrudController');
     CRUD::resource('article', 'ArticleCrudController');

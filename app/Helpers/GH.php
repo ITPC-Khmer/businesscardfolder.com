@@ -23,9 +23,19 @@ class GH extends Model
     public static function getRoleArray()
     {
         return [
-            1 => 'User',
-            2 => 'Admin',
-            3 => 'Supper Admin',
+            1 => 'Post Card',
+            2 => 'User',
+            3 => 'Admin',
+            4 => 'Supper Admin',
+        ];
+    }
+
+    public static function getMemberRoleArray()
+    {
+        return [
+            1 => 'Professional',
+            2 => 'Ultimate',
+            3 => 'Business',
         ];
     }
 
